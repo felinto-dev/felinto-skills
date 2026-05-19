@@ -1,0 +1,4 @@
+interface:
+  display_name: "CapRover One-Click Apps"
+  short_description: "Create CapRover one-click app templates"
+  default_prompt: "Use $caprover-one-click-app to create a CapRover one-click app template from this Docker Compose file."
