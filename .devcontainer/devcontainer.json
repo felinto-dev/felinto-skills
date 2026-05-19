@@ -7,9 +7,7 @@
 	"features": {
 		"ghcr.io/sliekens/devcontainer-features/codex:1": {},
 		"ghcr.io/devcontainers/features/python:1": {},
-		"ghcr.io/devcontainers/features/docker-in-docker:3": {
-			"moby": false
-		}
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
