@@ -64,6 +64,21 @@ Use these default patterns:
 
 For latest tags or versions, browse current official docs/package registries. Do not guess stale versions.
 
+
+## Image Selection
+
+Prefer small, stable images when they come from the official or most trusted upstream image repository and are compatible with the app. For common infrastructure services, default to Alpine-style variants when available and appropriate, such as `redis:<version>-alpine`, `postgres:<version>-alpine`, `mysql:<version>` only when no suitable small official variant exists, `mariadb:<version>`, `nginx:<version>-alpine`, and `caddy:<version>-alpine`.
+
+Do not switch to a smaller image from an obscure or less trusted Docker Hub publisher just to reduce size. Trust, maintenance, compatibility, and upstream support take priority over image size.
+
+When choosing image tags:
+
+- Prefer official images or the app publisher's official image.
+- Prefer pinned stable versions over `latest`, unless upstream explicitly recommends `latest` or does not publish stable tags.
+- Prefer Alpine/slim variants for supporting services when upstream supports them and the app does not require OS packages missing from those variants.
+- Avoid Alpine/slim variants when they are known to break native extensions, database locale/ICU requirements, shell scripts, health tooling, or upstream support expectations.
+- Mention any intentional non-Alpine choice when it affects resource usage or reliability.
+
 ## Output Target
 
 Decide the output target before creating or editing files. There are two common targets:
@@ -362,6 +377,7 @@ For private repositories, build static output from `dist/` and host it anywhere.
 - Persistent data uses named volumes prefixed with `$$cap_appname-`.
 - Variables include `id` and `label`; required fields have `validRegex`.
 - Version variables link to valid tag pages/docs and avoid `latest` unless upstream explicitly recommends it.
+- Official or upstream-trusted images are used, with Alpine/slim variants preferred when compatible.
 - Secrets default to `$$cap_gen_random_hex(length)` when possible.
 - `instructions.end` includes required post-deploy actions: enable HTTPS, enable WebSocket support, set domains, wait for migrations, or initial credentials.
 - `description` is under 200 chars.
