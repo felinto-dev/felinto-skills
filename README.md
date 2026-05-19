@@ -1,57 +1,43 @@
 # Felinto Skills
 
-Agent skills for use with the open `npx skills` CLI.
+Skills de agentes para uso com a CLI aberta `npx skills`.
 
-## Available Skills
+## Skills Disponiveis
 
-- `caprover-one-click-app` - Create, convert, validate, and improve CapRover One-Click App templates.
+- `caprover-one-click-app` - Cria, converte, valida e melhora templates CapRover One-Click App.
 
-## Install
-
-Replace `OWNER/felinto-skills` with this repository's GitHub owner and name.
+## Instalar
 
 ```bash
-npx skills add OWNER/felinto-skills --list
-npx skills add OWNER/felinto-skills --skill caprover-one-click-app -g -a codex -y
+npx skills add felinto-dev/felinto-skills --list
+npx skills add felinto-dev/felinto-skills --skill caprover-one-click-app -g -a codex -y
 ```
 
-Install all skills:
+Instalar todas as skills:
 
 ```bash
-npx skills add OWNER/felinto-skills --all
+npx skills add felinto-dev/felinto-skills --all
 ```
 
-Install from a full URL:
+Instalar usando a URL completa:
 
 ```bash
-npx skills add https://github.com/OWNER/felinto-skills --skill caprover-one-click-app
+npx skills add https://github.com/felinto-dev/felinto-skills --skill caprover-one-click-app
 ```
 
-## Repository Layout
+## Estrutura Do Repositorio
 
-Skills live under `.agents/skills/<skill-name>/SKILL.md`.
+As skills ficam em `.agents/skills/<nome-da-skill>/SKILL.md`.
 
-Each `SKILL.md` must include YAML frontmatter:
+Cada `SKILL.md` deve incluir frontmatter YAML:
 
 ```markdown
 ---
 name: skill-name
-description: Short description of when the agent should use this skill.
+description: Descricao curta de quando o agente deve usar esta skill.
 ---
 ```
 
-## Publish
+## Repositorio
 
-```bash
-git add .
-git commit -m "Add CapRover one-click app skill"
-git branch -M main
-git remote add origin git@github.com:OWNER/felinto-skills.git
-git push -u origin main
-```
-
-After the repository is public, users can install it with:
-
-```bash
-npx skills add OWNER/felinto-skills
-```
+https://github.com/felinto-dev/felinto-skills
