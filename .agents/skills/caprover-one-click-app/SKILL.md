@@ -64,6 +64,15 @@ Use these default patterns:
 
 For latest tags or versions, browse current official docs/package registries. Do not guess stale versions.
 
+## Output Target
+
+Decide the output target before creating or editing files. There are two common targets:
+
+- Standalone template: a single YAML the user can paste into CapRover's **>> TEMPLATE <<** flow. This is the default when the user says only "create a template", "make a one-click template", or similar. Do not create repository folders for this target unless the user explicitly asks for a file path.
+- One-click app repository entry: YAML under `public/v4/apps/<app-name>.yml`, usually with a logo under `public/v4/logos/`. Use this only when the user clearly says they are building or updating a CapRover one-click app repository, asks to add an app to this repo, references `public/v4/apps`, or the current repo is already unmistakably a one-click app repository and the request targets it.
+
+If the target is ambiguous and writing files would require creating repository structure such as `public/v4/apps`, ask a short clarifying question before making directories. If the user wants speed and does not specify a repository target, provide a standalone YAML file or inline YAML instead of creating repository structure.
+
 ## Discovery And Setup Choice
 
 Many apps have multiple valid deployment shapes. Do not assume the most complex setup is best. First identify likely options, then pick with the user.
@@ -105,6 +114,47 @@ Research the current official Docker/Compose deployment docs for <app>. Return: 
 ```
 
 Use the subagent's summary as input, then implement the template locally. If subagents are unavailable, do the web research locally and cite source URLs in the final answer when relevant.
+
+
+## Local Docker Testing
+
+When Docker CLI is available, use it to test the template locally before finalizing. The goal is to catch bad images, wrong commands, missing required env vars, wrong ports, and startup failures before the user pastes the YAML into CapRover.
+
+First check availability without assuming Docker works:
+
+```bash
+docker version
+```
+
+If Docker is unavailable, the daemon is not running, permissions are missing, or network pulls are blocked, do not block the template. State the exact limitation in the final answer and continue with static validation.
+
+For each public service or critical worker, when practical:
+
+- Pull or run the exact image tag selected for the template. Avoid validating only `latest` if the template defaults to a pinned version.
+- Start a temporary container with the same command, required env vars, and a temporary host port mapped to `caproverExtra.containerHttpPort`.
+- Use dummy generated secrets for local tests. Never print or hard-code real user secrets.
+- Mount a temporary volume or directory when the template uses persistent data.
+- Wait briefly, inspect logs, and confirm the process remains running or exits only for an expected documented reason.
+- Probe the mapped HTTP port with `curl` or equivalent when the service should expose HTTP.
+- For multi-service templates, prefer a temporary `docker compose` file that mirrors the CapRover services closely enough to test dependencies, internal hostnames, ports, env vars, and startup order. Use local Compose service names for the test file, but keep CapRover `srv-captain--...` hostnames in the final YAML.
+- Clean up temporary containers, networks, volumes, and files created for testing.
+
+Do not run destructive Docker cleanup such as broad `docker system prune`. Only remove resources created for the current test.
+
+Acceptable local test commands include focused checks such as:
+
+```bash
+docker run --rm IMAGE:TAG command --help
+docker run --rm -e KEY=value IMAGE:TAG command version
+docker run --name TEMP_NAME -d -p 127.0.0.1:HOST_PORT:CONTAINER_PORT -e KEY=value IMAGE:TAG command
+curl -fsS http://127.0.0.1:HOST_PORT/
+docker logs TEMP_NAME
+docker rm -f TEMP_NAME
+```
+
+If local Docker testing reveals that upstream docs are wrong, an image tag is missing, a command fails, or the app requires setup not expressible in CapRover YAML, fix the template or ask the user to choose a different deployment shape before presenting the final result.
+
+In the final answer, include a compact validation note: Docker tested, partially tested, or not tested, plus the important commands or checks performed.
 
 ## Naming And Networking
 
@@ -282,6 +332,8 @@ Postgres is deployed and available as srv-captain--$$cap_appname:5432 to other a
 
 ## Official Repository Work
 
+Only perform repository work after the output target is confirmed as a CapRover one-click app repository entry. Do not infer this from a generic request to create a template. Do not create `public/`, `public/v4/`, `public/v4/apps/`, or `public/v4/logos/` unless the repository target is explicit or confirmed by the user.
+
 When adding an app to a CapRover one-click repository:
 
 - Put YAML in `public/v4/apps/<app-name>.yml`.
@@ -314,6 +366,8 @@ For private repositories, build static output from `dist/` and host it anywhere.
 - `instructions.end` includes required post-deploy actions: enable HTTPS, enable WebSocket support, set domains, wait for migrations, or initial credentials.
 - `description` is under 200 chars.
 - `isOfficial` is conservative.
+- Docker CLI was used for local startup/port/command checks when available, or the reason it could not be used is reported.
+- Temporary Docker resources created during testing are cleaned up.
 - If targeting an app repository, matching logo exists and `npm run validate_apps` passes.
 
 ## Manual Template Testing
