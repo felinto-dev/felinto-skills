@@ -5,25 +5,15 @@ Skills de agentes para uso com a CLI aberta `npx skills`.
 ## Skills Disponiveis
 
 - `caprover-one-click-app` - Cria, converte, valida e melhora templates CapRover One-Click App.
+- `dont-reinvent-the-wheel` - Pesquisa solucoes existentes antes de criar uma feature do zero.
 
 ## Instalar
 
 ```bash
-npx skills add felinto-dev/felinto-skills --list
-npx skills add felinto-dev/felinto-skills --skill caprover-one-click-app -g -a codex -y
+npx skills add https://github.com/felinto-dev/felinto-skills
 ```
 
-Instalar todas as skills:
-
-```bash
-npx skills add felinto-dev/felinto-skills --all
-```
-
-Instalar usando a URL completa:
-
-```bash
-npx skills add https://github.com/felinto-dev/felinto-skills --skill caprover-one-click-app
-```
+Depois escolha a skill que deseja instalar no menu interativo.
 
 ## Estrutura Do Repositorio
 
