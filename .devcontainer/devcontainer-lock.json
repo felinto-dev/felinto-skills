@@ -1,19 +1,19 @@
 {
   "features": {
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-      "version": "1.9.1",
-      "resolved": "ghcr.io/devcontainers/features/docker-outside-of-docker@sha256:dc89605f01ff2f24252c61f7c8ba2a58ccdbc14f2ebf87a7952d9e2b89834850",
-      "integrity": "sha256:dc89605f01ff2f24252c61f7c8ba2a58ccdbc14f2ebf87a7952d9e2b89834850"
+    "ghcr.io/devcontainers/features/docker-outside-of-docker": {
+      "version": "1.10.0",
+      "resolved": "ghcr.io/devcontainers/features/docker-outside-of-docker@sha256:c2c2cf829505ead8e4892c88c31b6594ae94a2bbb209e16e1fac456c1a3a624e",
+      "integrity": "sha256:c2c2cf829505ead8e4892c88c31b6594ae94a2bbb209e16e1fac456c1a3a624e"
     },
     "ghcr.io/devcontainers/features/python:1": {
       "version": "1.8.0",
       "resolved": "ghcr.io/devcontainers/features/python@sha256:fbcad6955caeecc5ad3f7886baf652e25cba5225a6c4c2287c536de2e5607511",
       "integrity": "sha256:fbcad6955caeecc5ad3f7886baf652e25cba5225a6c4c2287c536de2e5607511"
     },
-    "ghcr.io/sliekens/devcontainer-features/codex:1": {
-      "version": "1.1.1",
-      "resolved": "ghcr.io/sliekens/devcontainer-features/codex@sha256:e9f1a2b35fd788d08451e8471464de8b2efee03c2769e455acbc0776dd1469d0",
-      "integrity": "sha256:e9f1a2b35fd788d08451e8471464de8b2efee03c2769e455acbc0776dd1469d0"
+    "ghcr.io/sliekens/devcontainer-features/codex": {
+      "version": "1.1.2",
+      "resolved": "ghcr.io/sliekens/devcontainer-features/codex@sha256:f109114053968fa79369bb20430905fa55809c90d9b91bf1b5ddcb15991920b7",
+      "integrity": "sha256:f109114053968fa79369bb20430905fa55809c90d9b91bf1b5ddcb15991920b7"
     }
   }
 }
