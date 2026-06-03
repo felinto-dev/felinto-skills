@@ -17,7 +17,9 @@ Depois escolha a skill que deseja instalar no menu interativo.
 
 ## Estrutura Do Repositorio
 
-As skills ficam em `.agents/skills/<nome-da-skill>/SKILL.md`.
+As skills ficam em `<nome-da-skill>/SKILL.md`, no diretorio principal do repositorio.
+
+Arquivos auxiliares especificos de uma skill devem ficar dentro do proprio diretorio da skill. Templates CapRover ficam em `caprover-one-click-app/templates/`.
 
 Cada `SKILL.md` deve incluir frontmatter YAML:
 
