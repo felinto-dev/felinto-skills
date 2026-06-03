@@ -7,7 +7,8 @@
 	"features": {
 		"ghcr.io/sliekens/devcontainer-features/codex": {},
 		"ghcr.io/devcontainers/features/python:1": {},
-		"ghcr.io/devcontainers/features/docker-outside-of-docker": {}
+		"ghcr.io/devcontainers/features/docker-outside-of-docker": {},
+		"ghcr.io/devcontainers/features/node:2": {}
 	},
 	"mounts": [
     "source=codex-data,target=/var/lib/codex,type=volume"
