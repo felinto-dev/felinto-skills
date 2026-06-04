@@ -1,11 +1,27 @@
 ---
 name: dont-reinvent-the-wheel
-description: Research existing products, open-source projects, SaaS tools, SDK features, APIs, webhooks, embeds, OAuth/SSO options, and integration paths before building a new app feature or stack from scratch. Use when the user asks to avoid reinventing the wheel, validate a feature idea, choose between building or integrating, find alternatives for a product workflow, analyze whether an app feature can be replaced by an existing solution, compare open-source/self-hosted versus paid tools, or discover simpler native options in an existing stack.
+description: Research existing products, open-source projects, SaaS tools, SDK features, APIs, webhooks, embeds, OAuth/SSO options, and integration paths before building a new app feature or stack from scratch. Use when the user asks to avoid reinventing the wheel, audit an existing app for custom code that could be replaced by native stack features or maintained tools, validate a feature idea, choose between building or integrating, find alternatives for a product workflow, analyze whether an app feature can be replaced by an existing solution, compare open-source/self-hosted versus paid tools, or discover simpler native options in an existing stack.
 ---
 
 # Dont Reinvent The Wheel
 
 Find existing solutions that can replace, simplify, or accelerate a requested feature before recommending custom implementation.
+
+## Existing App Audit Mode
+
+When invoked in an existing application without a specific feature request, audit the current codebase before researching external options:
+
+1. Identify the stack from manifests, lockfiles, Docker/Compose files, framework config, routes, DB/schema files, auth config, job/queue config, CI files, and package imports.
+2. Build a short inventory of custom-built capabilities, especially auth, billing, admin panels, CMS/content, search, file uploads, email/notifications, analytics, feature flags, chat, queues, scheduling, observability, permissions, CRUD scaffolding, webhooks, integrations, import/export, and AI tooling.
+3. Classify each capability:
+   - `Keep custom`: domain-specific, core differentiator, or already simpler than an integration.
+   - `Check native`: likely covered by the current framework, SDK, platform, DB, hosting provider, or existing dependency.
+   - `Research replacement`: table-stakes feature with meaningful maintenance/security/ops cost.
+   - `Defer`: too little evidence or too risky to recommend without product constraints.
+4. Research only the highest-leverage `Check native` and `Research replacement` items first. Prefer current-stack/native solutions before adding new services or dependencies.
+5. Produce an organized opportunity report, not a rewrite plan by default. Include evidence from the repo, candidate replacements, confidence, migration effort, risk, and a smallest useful proof of concept.
+
+Do not suggest replacing every custom component. Prioritize places where existing solutions reduce ongoing maintenance, security exposure, operational burden, or non-differentiating product work.
 
 ## Default Bias
 
@@ -21,16 +37,17 @@ Prefer solutions in this order unless the user gives different constraints:
 
 1. Clarify the job-to-be-done: user, workflow, must-have behavior, success criteria, timeline, data ownership, auth, hosting preference, budget sensitivity, compliance needs, stakeholders, and integration surface.
 2. If the user points to an existing repo or feature, inspect local code first to understand the real requirement before researching alternatives.
-3. Browse the web for current options. This skill depends on fresh information because projects, pricing, APIs, and maintenance status change.
-4. Search across categories, not only exact wording. Use queries such as:
+3. If the skill is invoked in an existing app with no specific command, run Existing App Audit Mode and choose 3-7 high-leverage opportunities before deep research.
+4. Browse the web for current options. This skill depends on fresh information because projects, pricing, APIs, and maintenance status change.
+5. Search across categories, not only exact wording. Use queries such as:
    - `<feature> open source self hosted`
    - `<feature> API webhook OAuth embed iframe`
    - `<feature> GitHub docker compose`
    - `<feature> alternatives`
    - `<current stack/tool> built in <feature>`
-5. Prioritize primary sources: official docs, GitHub repos, Docker/package registries, changelogs, pricing pages, API docs, and integration docs. Use lists/blogs only for discovery, then verify from primary sources.
-6. Build a candidate set of 5-10 options, then shortlist 3-5 serious choices plus a custom-build baseline.
-7. Validate candidates in two layers: first identify plausible alternatives, then verify fit against the user's actual workflow, codebase, constraints, and non-negotiable requirements.
+6. Prioritize primary sources: official docs, GitHub repos, Docker/package registries, changelogs, pricing pages, API docs, and integration docs. Use lists/blogs only for discovery, then verify from primary sources.
+7. Build a candidate set of 5-10 options, then shortlist 3-5 serious choices plus a custom-build baseline.
+8. Validate candidates in two layers: first identify plausible alternatives, then verify fit against the user's actual workflow, codebase, constraints, and non-negotiable requirements.
 
 Ask at most 3 concise questions only when missing constraints would materially change the recommendation. If the user asks for speed, proceed with explicit assumptions.
 
@@ -124,6 +141,15 @@ Then include:
 7. Source links used for current facts.
 
 Keep recommendations pragmatic. The goal is to save build time without outsourcing the product's core differentiator.
+
+For Existing App Audit Mode, use this shape:
+
+1. Stack detected: framework, runtime, DB, auth, hosting/deploy, key packages, and unknowns.
+2. Opportunity table: current custom area, repo evidence, suggested native/tool alternative, confidence, effort (`S/M/L`), expected code removed or maintenance reduced, and risk.
+3. Top recommendations: 1-3 items with the best effort-to-impact ratio.
+4. Keep custom: areas that look domain-specific or cheaper to maintain as-is.
+5. Research notes and source links for current external facts.
+6. Minimal proof-of-concept plan for the first recommendation only.
 
 ## Failure Patterns To Avoid
 
