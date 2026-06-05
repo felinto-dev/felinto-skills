@@ -51,6 +51,20 @@ Prefer solutions in this order unless the user gives different constraints:
 
 Ask at most 3 concise questions only when missing constraints would materially change the recommendation. If the user asks for speed, proceed with explicit assumptions.
 
+## Research Depth And Tool Preference
+
+Before broad research, check the available tool and skill surface from the current session: installed skills, MCP tools/servers, web/deep-research tools, and subagent/task tools. If a suitable deep-research skill, research MCP, package/docs MCP, vendor-discovery tool, or subagent is available, prefer it for candidate discovery and source verification over manual shallow search.
+
+Keep research depth reasonable by default:
+
+- Use local repo inspection first when a codebase is involved.
+- Use 2-4 targeted searches per major category, then stop expanding once 5-10 plausible candidates are found.
+- Verify only the 3-5 strongest candidates deeply from primary sources.
+- Go deeper only for high-cost, high-risk, regulated, security-sensitive, or explicitly requested decisions.
+- For simple native-stack checks, avoid heavyweight deep research.
+
+When subagents are available, delegate bounded research tasks to preserve main-session context. Ask for a compact structured result only: candidates, primary source links, evidence for APIs/webhooks/auth/export, maintenance/maturity signals, pricing/license notes, confidence, and unresolved gaps. Do not pass unnecessary conversation history, and do not import long raw outputs into the main context; summarize and cite the facts needed for the decision.
+
 ## Build Versus Buy Gate
 
 Recommend building only when at least one strong reason applies:
