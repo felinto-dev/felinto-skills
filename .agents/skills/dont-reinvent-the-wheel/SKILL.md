@@ -102,6 +102,8 @@ Score finalists from 1-5 per criterion. Treat the score as decision support, not
 
 Do not invent support for APIs, webhooks, OAuth, pricing, or licenses. If source evidence is weak, label it as unverified.
 
+When the solution would run as a separate hosted system, or when the user needs to integrate it into an existing app, give extra attention to standard integration surfaces. Prefer candidates with documented REST or GraphQL APIs, outbound webhooks, standards-based auth such as OAuth 2.0 or OpenID Connect, embeddable UI when useful, admin/provisioning automation, and reliable export paths. Highlight these strengths or gaps in the rationale, risks, or integration sketch where they materially affect the decision; do not force them into every comparison table when they are irrelevant.
+
 ## Replacement Safety
 
 When replacing custom code, a current dependency, or a planned custom feature with an existing solution:
@@ -134,7 +136,7 @@ Then include:
 
 1. Short rationale in plain language.
 2. Comparison table with the strongest options and a custom-build baseline, including confidence, effort, cost model, lock-in, and source quality.
-3. Integration sketch for the recommended path: auth, data flow, API/webhook/embed points, hosting, migration/export, and code the app still needs.
+3. Integration sketch for the recommended path: auth, data flow, API/webhook/embed points when relevant, hosting, migration/export, and code the app still needs.
 4. Rejected alternatives and why they failed must-have, confidence, cost, lock-in, or operational requirements.
 5. Risks and tradeoffs that could change the decision.
 6. Minimal proof-of-concept plan with 2-5 concrete steps and explicit keep/discard criteria.
