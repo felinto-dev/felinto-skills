@@ -1,6 +1,6 @@
 ---
 name: dont-reinvent-the-wheel
-description: Research existing products, open-source projects, SaaS tools, SDK features, APIs, webhooks, embeds, OAuth/SSO options, and integration paths before building a new app feature or stack from scratch. Use when the user asks to avoid reinventing the wheel, audit an existing app for custom code that could be replaced by native stack features or maintained tools, validate a feature idea, choose between building or integrating, find alternatives for a product workflow, analyze whether an app feature can be replaced by an existing solution, compare open-source/self-hosted versus paid tools, or discover simpler native options in an existing stack.
+description: Research existing products, open-source projects, commercial script marketplaces such as CodeCanyon/Envato Market, SaaS tools, SDK features, APIs, webhooks, embeds, OAuth/SSO options, and integration paths before building a new app feature or stack from scratch. Use when the user asks to avoid reinventing the wheel, audit an existing app for custom code that could be replaced by native stack features or maintained tools, validate a feature idea, choose between building or integrating, find alternatives for a product workflow, analyze whether an app feature can be replaced by an existing solution, compare open-source/self-hosted/paid marketplace/SaaS options, or discover simpler native options in an existing stack.
 ---
 
 # Dont Reinvent The Wheel
@@ -29,9 +29,10 @@ Prefer solutions in this order unless the user gives different constraints:
 
 1. Native capability already available in the user's current stack or SDK.
 2. Mature open-source or self-hostable tool with API/webhook/embed support.
-3. Paid SaaS with clear cost/benefit and low integration risk.
-4. Hybrid approach: integrate an existing core and build only the missing differentiator.
-5. Custom build only when existing options fail key requirements or create worse risk.
+3. Commercial source-available or self-hosted script from a reputable marketplace, when docs/demo/license/support fit the project and integration surfaces are verifiable.
+4. Paid SaaS with clear cost/benefit and low integration risk.
+5. Hybrid approach: integrate an existing core and build only the missing differentiator.
+6. Custom build only when existing options fail key requirements or create worse risk.
 
 ## Discovery Workflow
 
@@ -43,11 +44,14 @@ Prefer solutions in this order unless the user gives different constraints:
    - `<feature> open source self hosted`
    - `<feature> API webhook OAuth embed iframe`
    - `<feature> GitHub docker compose`
+   - `<feature> CodeCanyon script REST API OAuth`
+   - `<feature> Envato Market <stack> script API`
    - `<feature> alternatives`
    - `<current stack/tool> built in <feature>`
-6. Prioritize primary sources: official docs, GitHub repos, Docker/package registries, changelogs, pricing pages, API docs, and integration docs. Use lists/blogs only for discovery, then verify from primary sources.
-7. Build a candidate set of 5-10 options, then shortlist 3-5 serious choices plus a custom-build baseline.
-8. Validate candidates in two layers: first identify plausible alternatives, then verify fit against the user's actual workflow, codebase, constraints, and non-negotiable requirements.
+6. Include marketplace searches when the need resembles a reusable app module, plugin, admin panel, vertical SaaS starter, dashboard, booking/marketplace/LMS/CRM/ecommerce flow, or payment/subscription integration that could be bought as source and self-hosted.
+7. Prioritize primary sources: official docs, GitHub repos, Docker/package registries, changelogs, pricing pages, API docs, integration docs, marketplace item pages, live demos, author docs, comments/support signals, and license/support terms. Use lists/blogs only for discovery, then verify from primary sources.
+8. Build a candidate set of 5-10 options, then shortlist 3-5 serious choices plus a custom-build baseline.
+9. Validate candidates in two layers: first identify plausible alternatives, then verify fit against the user's actual workflow, codebase, constraints, and non-negotiable requirements.
 
 Ask at most 3 concise questions only when missing constraints would materially change the recommendation. If the user asks for speed, proceed with explicit assumptions.
 
@@ -59,6 +63,7 @@ Keep research depth reasonable by default:
 
 - Use local repo inspection first when a codebase is involved.
 - Use 2-4 targeted searches per major category, then stop expanding once 5-10 plausible candidates are found.
+- Add a marketplace-script pass only when buying/self-hosting source would plausibly beat OSS/SaaS/custom build for speed, ownership, or cost.
 - Verify only the 3-5 strongest candidates deeply from primary sources.
 - Go deeper only for high-cost, high-risk, regulated, security-sensitive, or explicitly requested decisions.
 - For simple native-stack checks, avoid heavyweight deep research.
@@ -100,6 +105,16 @@ Evaluate each serious candidate on:
 - Security/privacy: auth model, secret handling, tenant isolation, audit logs, compliance needs when relevant.
 - Build avoidance: what custom code remains after integration, and whether that code is worth building.
 
+For marketplace scripts such as CodeCanyon/Envato Market items, also evaluate:
+
+- Integration proof: documented REST/GraphQL API, webhooks, OAuth/OIDC/social login/SSO, embed/admin surfaces, or clear extension points; do not infer these from screenshots.
+- Source and customization: source access, framework/version, dependency age, install path, update workflow, ability to fork/patch, and whether critical code is encrypted or vendor-locked.
+- Marketplace health: last update date, changelog quality, author history, sales/reviews/comments trend, support status, live demo quality, docs depth, and responsiveness to security/compatibility issues.
+- License and usage fit: regular/extended license fit, SaaS/client/multi-tenant redistribution limits, update/support duration, renewal cost, and whether the user's intended deployment is allowed.
+- Security posture: auth implementation, password/session handling, tenant isolation, file upload safety, dependency vulnerabilities, payment handling, and data export/backup path.
+
+Treat marketplace scripts as serious candidates, not automatic winners. They are strongest when the user wants a common self-hosted workflow quickly and accepts source-level ownership. Downgrade or reject them when APIs/auth/export are unverified, the framework is stale, customization would be extensive, the license is unclear, or support/updates look weak.
+
 When a weighted scorecard helps, use this default weighting and adjust it only when the user's context demands it:
 
 | Criterion | Weight |
@@ -126,7 +141,8 @@ When replacing custom code, a current dependency, or a planned custom feature wi
 - Preserve public interfaces unless the user explicitly accepts a migration.
 - Prefer native platform APIs and existing project dependencies before adding new packages or SaaS.
 - Skip replacement when feature parity is below roughly 80%, when the code is domain-specific business logic, or when the remaining glue code is more complex than the original.
-- Check maintenance activity, license compatibility, security advisories, export paths, and deprecation history before recommending OSS or SaaS.
+- Check maintenance activity, license compatibility, security advisories, export paths, and deprecation history before recommending OSS, marketplace scripts, or SaaS.
+- For marketplace scripts, inspect docs/demo/changelog/license/support before recommending purchase or integration; if purchase is required to verify a critical claim, label the option `MEDIUM` or lower until verified.
 - Estimate effort realistically: `S` under 1 hour, `M` 1-4 hours, `L` over 4 hours.
 
 For implementation-oriented requests, propose an atomic proof of concept:
@@ -149,7 +165,7 @@ Put the decision first:
 Then include:
 
 1. Short rationale in plain language.
-2. Comparison table with the strongest options and a custom-build baseline, including confidence, effort, cost model, lock-in, and source quality.
+2. Comparison table with the strongest options and a custom-build baseline, including confidence, effort, cost model, lock-in, source/license type, and source quality.
 3. Integration sketch for the recommended path: auth, data flow, API/webhook/embed points when relevant, hosting, migration/export, and code the app still needs.
 4. Rejected alternatives and why they failed must-have, confidence, cost, lock-in, or operational requirements.
 5. Risks and tradeoffs that could change the decision.
@@ -171,8 +187,10 @@ For Existing App Audit Mode, use this shape:
 
 - Starting with vendor demos or GitHub popularity before defining the need.
 - Comparing tools without a custom-build baseline.
-- Trusting search snippets, marketplace claims, or old blog posts without primary-source verification.
+- Trusting search snippets, marketplace claims, live demos, reviews, or old blog posts without primary-source verification.
 - Recommending OSS only because it exists, without checking maintenance, license, security, and API fit.
+- Ignoring commercial script marketplaces when a table-stakes self-hosted app module could be bought with source and integrated faster.
+- Recommending marketplace scripts without checking license fit, update/support posture, API/auth/export proof, framework age, and security implications.
 - Recommending SaaS without checking data export, renewal/usage pricing, auth model, audit logs, and exit path.
 - Replacing domain-specific product logic with a generic package that forces awkward workflows.
 - Ignoring the cost of glue code, migrations, operational ownership, and support burden.
@@ -185,3 +203,5 @@ For bookmark/directories/content curation, look for self-hosted knowledge-base, 
 For AI observability/tracing, check native SDK/platform tracing first, then compare specialized tools only if the user needs collaboration, long retention, evals, prompt management, cost analytics, or multi-provider traces.
 
 For AI chat/admin/user-facing agent panels, look for mature chat UIs with API, user provisioning, OAuth/OIDC, model/provider routing, iframe/subdomain deployment, and admin controls before building chat UX from scratch.
+
+For common business workflows such as CRM, LMS, bookings, classifieds, marketplaces, helpdesk, invoicing, directories, subscriptions, ecommerce add-ons, and admin dashboards, search CodeCanyon/Envato Market alongside GitHub and SaaS options, especially for Laravel, WordPress, Node, React, Flutter, and mobile app starters.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Don't Reinvent the Wheel"
-  short_description: "Find native or existing solutions before building"
-  default_prompt: "Use $dont-reinvent-the-wheel to audit this app or feature for native stack capabilities, existing tools, and integration options before building custom code."
+  short_description: "Find native, OSS, SaaS, or scripts first"
+  default_prompt: "Use $dont-reinvent-the-wheel to audit this app or feature for native stack capabilities, OSS, marketplace scripts, SaaS tools, and integration options before building custom code."
