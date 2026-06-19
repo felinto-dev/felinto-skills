@@ -12,6 +12,7 @@ Find existing solutions that can replace, simplify, or accelerate a requested fe
 Keep this file as the router. Load only the references needed for the current task:
 
 - Read `references/app-audit.md` when auditing an existing codebase or when the user invokes the skill in an app without a specific feature request.
+- Read `references/discovery-sources.md` when broad candidate discovery is needed, when obvious searches are not enough, or when sentiment/adoption risk could change the recommendation.
 - Read `references/marketplace.md` when marketplace scripts could plausibly replace or accelerate the workflow, especially self-hosted app modules, dashboards, admin panels, ecommerce, CRM, LMS, booking, chatbots, SaaS starters, and payment/subscription integrations.
 - Read `references/scorecard.md` when comparing serious candidates, deciding build versus buy, replacing existing code, checking confidence, or using a weighted evaluation.
 - Read `references/recommendation.md` before writing the final recommendation or opportunity report.
@@ -75,10 +76,11 @@ Press on vague answers and hidden tradeoffs, but avoid philosophical questions. 
    - `<feature> Envato Market <stack> script API`
    - `<feature> alternatives`
    - `<current stack/tool> built in <feature>`
-6. Run the marketplace gate before final recommendations. Read `references/marketplace.md` when marketplace scripts are plausible.
-7. Prioritize primary sources: official docs, GitHub repos, Docker/package registries, changelogs, pricing pages, API docs, integration docs, marketplace item pages, live demos, author docs, comments/support signals, and license/support terms. Use lists/blogs only for discovery, then verify from primary sources.
-8. Build a candidate set of 5-10 options, then shortlist 3-5 serious choices plus a custom-build baseline.
-9. Validate candidates in two layers: first identify plausible alternatives, then verify fit against the user's actual workflow, codebase, constraints, and non-negotiable requirements.
+6. For broad or under-specified discovery, read `references/discovery-sources.md` and use secondary discovery/sentiment sources only to find candidates or risks.
+7. Run the marketplace gate before final recommendations. Read `references/marketplace.md` when marketplace scripts are plausible.
+8. Prioritize primary sources: official docs, GitHub repos, Docker/package registries, changelogs, pricing pages, API docs, integration docs, marketplace item pages, live demos, author docs, comments/support signals, and license/support terms. Use lists/blogs, Product Hunt, Reddit, Hacker News, review sites, and directories only for discovery/sentiment, then verify from primary sources.
+9. Build a candidate set of 5-10 options, then shortlist 3-5 serious choices plus a custom-build baseline.
+10. Validate candidates in two layers: first identify plausible alternatives, then verify fit against the user's actual workflow, codebase, constraints, and non-negotiable requirements.
 
 ## Research Depth And Tool Preference
 
