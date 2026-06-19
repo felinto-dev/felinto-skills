@@ -7,21 +7,14 @@ description: Research existing products, open-source projects, commercial script
 
 Find existing solutions that can replace, simplify, or accelerate a requested feature before recommending custom implementation.
 
-## Existing App Audit Mode
+## Load References
 
-When invoked in an existing application without a specific feature request, audit the current codebase before researching external options:
+Keep this file as the router. Load only the references needed for the current task:
 
-1. Identify the stack from manifests, lockfiles, Docker/Compose files, framework config, routes, DB/schema files, auth config, job/queue config, CI files, and package imports.
-2. Build a short inventory of custom-built capabilities, especially auth, billing, admin panels, CMS/content, search, file uploads, email/notifications, analytics, feature flags, chat, queues, scheduling, observability, permissions, CRUD scaffolding, webhooks, integrations, import/export, and AI tooling.
-3. Classify each capability:
-   - `Keep custom`: domain-specific, core differentiator, or already simpler than an integration.
-   - `Check native`: likely covered by the current framework, SDK, platform, DB, hosting provider, or existing dependency.
-   - `Research replacement`: table-stakes feature with meaningful maintenance/security/ops cost.
-   - `Defer`: too little evidence or too risky to recommend without product constraints.
-4. Research only the highest-leverage `Check native` and `Research replacement` items first. Prefer current-stack/native solutions before adding new services or dependencies.
-5. Produce an organized opportunity report, not a rewrite plan by default. Include evidence from the repo, candidate replacements, confidence, migration effort, risk, and a smallest useful proof of concept.
-
-Do not suggest replacing every custom component. Prioritize places where existing solutions reduce ongoing maintenance, security exposure, operational burden, or non-differentiating product work.
+- Read `references/app-audit.md` when auditing an existing codebase or when the user invokes the skill in an app without a specific feature request.
+- Read `references/marketplace.md` when marketplace scripts could plausibly replace or accelerate the workflow, especially self-hosted app modules, dashboards, admin panels, ecommerce, CRM, LMS, booking, chatbots, SaaS starters, and payment/subscription integrations.
+- Read `references/scorecard.md` when comparing serious candidates, deciding build versus buy, replacing existing code, checking confidence, or using a weighted evaluation.
+- Read `references/recommendation.md` before writing the final recommendation or opportunity report.
 
 ## Default Bias
 
@@ -34,7 +27,7 @@ Prefer solutions in this order unless the user gives different constraints:
 5. Hybrid approach: integrate an existing core and build only the missing differentiator.
 6. Custom build only when existing options fail key requirements or create worse risk.
 
-## Interaction Mode Selection
+## Choose Mode
 
 Choose the lightest mode that can produce a defensible recommendation.
 
@@ -54,11 +47,7 @@ Do not force an interview for simple requests. If a quick answer is enough, answ
 
 ## Interactive Discovery Interview Mode
 
-When selected, interview the user before producing a recommendation.
-
-Interview goal: reach shared understanding of the job-to-be-done, constraints, decision dependencies, and option space before recommending build/buy/reuse paths.
-
-Use this loop:
+When selected, interview before recommending. Goal: resolve the job-to-be-done, constraints, decision dependencies, and option space.
 
 1. Build a concise decision tree from the current plan or feature idea.
 2. Ask one high-leverage question at a time.
@@ -76,7 +65,7 @@ Press on vague answers and hidden tradeoffs, but avoid philosophical questions. 
 
 1. Clarify the job-to-be-done: user, workflow, must-have behavior, success criteria, timeline, data ownership, auth, hosting preference, budget sensitivity, compliance needs, stakeholders, and integration surface.
 2. If the user points to an existing repo or feature, inspect local code first to understand the real requirement before researching alternatives.
-3. If the skill is invoked in an existing app with no specific command, run Existing App Audit Mode and choose 3-7 high-leverage opportunities before deep research.
+3. If the skill is invoked in an existing app with no specific command, read `references/app-audit.md` and choose 3-7 high-leverage opportunities before deep research.
 4. Browse the web for current options. This skill depends on fresh information because projects, pricing, APIs, and maintenance status change.
 5. Search across categories, not only exact wording. Use queries such as:
    - `<feature> open source self hosted`
@@ -86,16 +75,10 @@ Press on vague answers and hidden tradeoffs, but avoid philosophical questions. 
    - `<feature> Envato Market <stack> script API`
    - `<feature> alternatives`
    - `<current stack/tool> built in <feature>`
-6. Run the Marketplace Pass Gate before final recommendations.
+6. Run the marketplace gate before final recommendations. Read `references/marketplace.md` when marketplace scripts are plausible.
 7. Prioritize primary sources: official docs, GitHub repos, Docker/package registries, changelogs, pricing pages, API docs, integration docs, marketplace item pages, live demos, author docs, comments/support signals, and license/support terms. Use lists/blogs only for discovery, then verify from primary sources.
 8. Build a candidate set of 5-10 options, then shortlist 3-5 serious choices plus a custom-build baseline.
 9. Validate candidates in two layers: first identify plausible alternatives, then verify fit against the user's actual workflow, codebase, constraints, and non-negotiable requirements.
-
-In `Quick Check Mode`, ask at most 1 clarifying question.
-
-In `Standard Research Mode`, ask at most 3 concise questions only when missing constraints would materially change the recommendation. If the user asks for speed, proceed with explicit assumptions.
-
-In `Interactive Discovery Interview Mode`, ask one question at a time until the decision tree is resolved enough to make a defensible recommendation.
 
 ## Research Depth And Tool Preference
 
@@ -117,15 +100,13 @@ Before a final recommendation, explicitly record one of these outcomes:
 - `Marketplace checked`: search CodeCanyon/Envato Market at least once, include 2-5 plausible marketplace candidates when any exist, and explain why each is accepted, rejected, or left unverified.
 - `Marketplace skipped`: state the concrete reason marketplace scripts do not fit this task.
 
-Do not skip the marketplace pass for self-hosted apps, admin panels, AI chat/workflow tools, SaaS starters, dashboards, CRM, LMS, booking, ecommerce, chatbot widgets, automation modules, payment/subscription integrations, or any reusable app module that could plausibly be bought with source.
-
-When the marketplace pass is required but expected to be low-fit, still do a quick pass. A likely rejection is not a reason to skip verification.
+Do not skip the marketplace pass for self-hosted apps, admin panels, AI chat/workflow tools, SaaS starters, dashboards, CRM, LMS, booking, ecommerce, chatbot widgets, automation modules, payment/subscription integrations, or any reusable app module that could plausibly be bought with source. When required but expected to be low-fit, still do a quick pass.
 
 When subagents are available, delegate bounded research tasks to preserve main-session context. Ask for a compact structured result only: candidates, primary source links, evidence for APIs/webhooks/auth/export, maintenance/maturity signals, pricing/license notes, confidence, and unresolved gaps. Do not pass unnecessary conversation history, and do not import long raw outputs into the main context; summarize and cite the facts needed for the decision.
 
 ## Build Versus Buy Gate
 
-Recommend building only when at least one strong reason applies:
+Read `references/scorecard.md` for detailed gates. Recommend building only when at least one strong reason applies:
 
 - The workflow is core product differentiation.
 - Existing tools fail must-have requirements or create unacceptable lock-in, security, privacy, latency, or cost risk.
@@ -134,57 +115,6 @@ Recommend building only when at least one strong reason applies:
 - A hybrid approach would leave too much fragile glue code.
 
 Recommend buying, integrating, or reusing when the need is table stakes, existing tools cover most requirements, specialized vendors or OSS projects maintain the hard parts better, or the team should focus on product-specific work.
-
-## Confidence Gates
-
-Classify each serious candidate before recommending it:
-
-- `HIGH`: verified primary sources, clear feature fit, usable integration path, active maintenance, acceptable license/cost/security posture.
-- `MEDIUM`: likely fit, but one or two material unknowns remain such as pricing edge cases, migration effort, missing trial evidence, or unclear API depth.
-- `LOW`: weak source evidence, stale project, unclear feature parity, risky lock-in, unsupported auth/export, or major unknowns.
-
-Do not recommend a `LOW` confidence option as the primary path. Keep it in risks or rejected alternatives if relevant.
-
-## Evaluation Criteria
-
-Evaluate each serious candidate on:
-
-- Functional fit: how directly it solves the user's workflow.
-- Integration: API, webhooks, SDKs, iframe/embed, OAuth/OIDC/SAML, SCIM, export/import, admin automation.
-- Ownership: open source, source-available, paid SaaS, license, data portability, lock-in.
-- Operations: Docker/Compose availability, deployment complexity, backups, upgrades, scaling, observability.
-- Product maturity: recent releases, active maintainers, docs quality, community, issue velocity, ecosystem.
-- Cost/benefit: free tier, self-host cost, paid plans, per-seat/per-usage traps, enterprise-only features.
-- Security/privacy: auth model, secret handling, tenant isolation, audit logs, compliance needs when relevant.
-- Build avoidance: what custom code remains after integration, and whether that code is worth building.
-
-For marketplace scripts such as CodeCanyon/Envato Market items, also evaluate:
-
-- Integration proof: documented REST/GraphQL API, webhooks, OAuth/OIDC/social login/SSO, embed/admin surfaces, or clear extension points; do not infer these from screenshots.
-- Source and customization: source access, framework/version, dependency age, install path, update workflow, ability to fork/patch, and whether critical code is encrypted or vendor-locked.
-- Marketplace health: last update date, changelog quality, author history, sales/reviews/comments trend, support status, live demo quality, docs depth, and responsiveness to security/compatibility issues.
-- License and usage fit: regular/extended license fit, SaaS/client/multi-tenant redistribution limits, update/support duration, renewal cost, and whether the user's intended deployment is allowed.
-- Security posture: auth implementation, password/session handling, tenant isolation, file upload safety, dependency vulnerabilities, payment handling, and data export/backup path.
-
-Treat marketplace scripts as serious candidates, not automatic winners. They are strongest when the user wants a common self-hosted workflow quickly and accepts source-level ownership. Downgrade or reject them when APIs/auth/export are unverified, the framework is stale, customization would be extensive, the license is unclear, or support/updates look weak.
-
-When a weighted scorecard helps, use this default weighting and adjust it only when the user's context demands it:
-
-| Criterion | Weight |
-| --- | ---: |
-| Functional fit | 35% |
-| Integration and technical fit | 20% |
-| Operations and maintainability | 10% |
-| Security, privacy, and compliance | 10% |
-| Maturity and vendor/project health | 10% |
-| Cost and pricing model | 10% |
-| Lock-in and exit path | 5% |
-
-Score finalists from 1-5 per criterion. Treat the score as decision support, not the decision itself; call out any criterion that should override the total.
-
-Do not invent support for APIs, webhooks, OAuth, pricing, or licenses. If source evidence is weak, label it as unverified.
-
-When the solution would run as a separate hosted system, or when the user needs to integrate it into an existing app, give extra attention to standard integration surfaces. Prefer candidates with documented REST or GraphQL APIs, outbound webhooks, standards-based auth such as OAuth 2.0 or OpenID Connect, embeddable UI when useful, admin/provisioning automation, and reliable export paths. Highlight these strengths or gaps in the rationale, risks, or integration sketch where they materially affect the decision; do not force them into every comparison table when they are irrelevant.
 
 ## Replacement Safety
 
@@ -208,34 +138,14 @@ For implementation-oriented requests, propose an atomic proof of concept:
 
 ## Recommendation Shape
 
-Put the decision first:
+Read `references/recommendation.md` before finalizing. Put the decision first:
 
 - `Use <tool>` when one option is clearly best.
 - `Prototype <tool A> and <tool B>` when uncertainty is mostly practical fit.
 - `Use native <stack feature>` when the user's stack already solves it simply.
 - `Build custom` only after explaining why existing options are not suitable.
 
-Then include:
-
-1. Short rationale in plain language.
-2. Comparison table with the strongest options and a custom-build baseline, including confidence, effort, cost model, lock-in, source/license type, and source quality.
-3. Integration sketch for the recommended path: auth, data flow, API/webhook/embed points when relevant, hosting, migration/export, and code the app still needs.
-4. Rejected alternatives and why they failed must-have, confidence, cost, lock-in, or operational requirements.
-5. Marketplace pass: `checked` or `skipped`, with accepted/rejected marketplace candidates or the concrete skip reason.
-6. Risks and tradeoffs that could change the decision.
-7. Minimal proof-of-concept plan with 2-5 concrete steps and explicit keep/discard criteria.
-8. Source links used for current facts.
-
 Keep recommendations pragmatic. The goal is to save build time without outsourcing the product's core differentiator.
-
-For Existing App Audit Mode, use this shape:
-
-1. Stack detected: framework, runtime, DB, auth, hosting/deploy, key packages, and unknowns.
-2. Opportunity table: current custom area, repo evidence, suggested native/tool alternative, confidence, effort (`S/M/L`), expected code removed or maintenance reduced, and risk.
-3. Top recommendations: 1-3 items with the best effort-to-impact ratio.
-4. Keep custom: areas that look domain-specific or cheaper to maintain as-is.
-5. Research notes and source links for current external facts.
-6. Minimal proof-of-concept plan for the first recommendation only.
 
 ## Failure Patterns To Avoid
 
