@@ -86,7 +86,7 @@ Press on vague answers and hidden tradeoffs, but avoid philosophical questions. 
    - `<feature> Envato Market <stack> script API`
    - `<feature> alternatives`
    - `<current stack/tool> built in <feature>`
-6. Include marketplace searches when the need resembles a reusable app module, plugin, admin panel, vertical SaaS starter, dashboard, booking/marketplace/LMS/CRM/ecommerce flow, or payment/subscription integration that could be bought as source and self-hosted.
+6. Run the Marketplace Pass Gate before final recommendations.
 7. Prioritize primary sources: official docs, GitHub repos, Docker/package registries, changelogs, pricing pages, API docs, integration docs, marketplace item pages, live demos, author docs, comments/support signals, and license/support terms. Use lists/blogs only for discovery, then verify from primary sources.
 8. Build a candidate set of 5-10 options, then shortlist 3-5 serious choices plus a custom-build baseline.
 9. Validate candidates in two layers: first identify plausible alternatives, then verify fit against the user's actual workflow, codebase, constraints, and non-negotiable requirements.
@@ -109,6 +109,17 @@ Keep research depth reasonable by default:
 - Verify only the 3-5 strongest candidates deeply from primary sources.
 - Go deeper only for high-cost, high-risk, regulated, security-sensitive, or explicitly requested decisions.
 - For simple native-stack checks, avoid heavyweight deep research.
+
+## Marketplace Pass Gate
+
+Before a final recommendation, explicitly record one of these outcomes:
+
+- `Marketplace checked`: search CodeCanyon/Envato Market at least once, include 2-5 plausible marketplace candidates when any exist, and explain why each is accepted, rejected, or left unverified.
+- `Marketplace skipped`: state the concrete reason marketplace scripts do not fit this task.
+
+Do not skip the marketplace pass for self-hosted apps, admin panels, AI chat/workflow tools, SaaS starters, dashboards, CRM, LMS, booking, ecommerce, chatbot widgets, automation modules, payment/subscription integrations, or any reusable app module that could plausibly be bought with source.
+
+When the marketplace pass is required but expected to be low-fit, still do a quick pass. A likely rejection is not a reason to skip verification.
 
 When subagents are available, delegate bounded research tasks to preserve main-session context. Ask for a compact structured result only: candidates, primary source links, evidence for APIs/webhooks/auth/export, maintenance/maturity signals, pricing/license notes, confidence, and unresolved gaps. Do not pass unnecessary conversation history, and do not import long raw outputs into the main context; summarize and cite the facts needed for the decision.
 
@@ -210,9 +221,10 @@ Then include:
 2. Comparison table with the strongest options and a custom-build baseline, including confidence, effort, cost model, lock-in, source/license type, and source quality.
 3. Integration sketch for the recommended path: auth, data flow, API/webhook/embed points when relevant, hosting, migration/export, and code the app still needs.
 4. Rejected alternatives and why they failed must-have, confidence, cost, lock-in, or operational requirements.
-5. Risks and tradeoffs that could change the decision.
-6. Minimal proof-of-concept plan with 2-5 concrete steps and explicit keep/discard criteria.
-7. Source links used for current facts.
+5. Marketplace pass: `checked` or `skipped`, with accepted/rejected marketplace candidates or the concrete skip reason.
+6. Risks and tradeoffs that could change the decision.
+7. Minimal proof-of-concept plan with 2-5 concrete steps and explicit keep/discard criteria.
+8. Source links used for current facts.
 
 Keep recommendations pragmatic. The goal is to save build time without outsourcing the product's core differentiator.
 
