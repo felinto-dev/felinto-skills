@@ -1,6 +1,6 @@
 ---
 name: dont-reinvent-the-wheel
-description: Research existing products, open-source projects, commercial script marketplaces such as CodeCanyon/Envato Market, SaaS tools, SDK features, APIs, webhooks, embeds, OAuth/SSO options, and integration paths before building a new app feature or stack from scratch. Use when the user asks to avoid reinventing the wheel, audit an existing app for custom code that could be replaced by native stack features or maintained tools, validate a feature idea, choose between building or integrating, find alternatives for a product workflow, analyze whether an app feature can be replaced by an existing solution, compare open-source/self-hosted/paid marketplace/SaaS options, or discover simpler native options in an existing stack.
+description: Research existing products, open-source projects, commercial script marketplaces such as CodeCanyon/Envato Market, SaaS tools, SDK features, APIs, webhooks, embeds, OAuth/SSO options, and integration paths before building a new app feature or stack from scratch. Use when the user asks to avoid reinventing the wheel, audit an existing app for custom code that could be replaced by native stack features or maintained tools, validate a feature idea, choose between building or integrating, find alternatives for a product workflow, run an interactive discovery interview or plan stress-test before deciding, analyze whether an app feature can be replaced by an existing solution, compare open-source/self-hosted/paid marketplace/SaaS options, or discover simpler native options in an existing stack.
 ---
 
 # Dont Reinvent The Wheel
@@ -34,6 +34,44 @@ Prefer solutions in this order unless the user gives different constraints:
 5. Hybrid approach: integrate an existing core and build only the missing differentiator.
 6. Custom build only when existing options fail key requirements or create worse risk.
 
+## Interaction Mode Selection
+
+Choose the lightest mode that can produce a defensible recommendation.
+
+Use `Quick Check Mode` when the request is narrow, reversible, low-cost, or asks for a quick comparison. Ask at most 1 clarifying question; otherwise proceed with explicit assumptions.
+
+Use `Standard Research Mode` when the request affects architecture, dependencies, paid tools, auth, data ownership, migration, or user-facing workflows. Ask up to 3 concise questions only when the answers materially change the recommendation.
+
+Use `Interactive Discovery Interview Mode` when:
+
+- The user explicitly asks for an interview, grilling, stress-test, requirements discovery, or decision-tree walkthrough.
+- The plan is vague but high-impact.
+- Multiple decisions depend on each other.
+- Choosing wrong would create significant migration, cost, lock-in, security, compliance, or product risk.
+- A defensible recommendation requires understanding user/workflow/data/auth/integration constraints first.
+
+Do not force an interview for simple requests. If a quick answer is enough, answer quickly and mention assumptions.
+
+## Interactive Discovery Interview Mode
+
+When selected, interview the user before producing a recommendation.
+
+Interview goal: reach shared understanding of the job-to-be-done, constraints, decision dependencies, and option space before recommending build/buy/reuse paths.
+
+Use this loop:
+
+1. Build a concise decision tree from the current plan or feature idea.
+2. Ask one high-leverage question at a time.
+3. For each question, include why the decision matters, 2-4 concrete answer options when useful, a clearly labeled recommended answer with short rationale, and downstream decisions that depend on it.
+4. After the user answers, restate the locked-in decision and any assumptions.
+5. Browse the web before the next question when current options, pricing, APIs, marketplace scripts, native stack features, or implementation tradeoffs could change the next decision.
+6. Use the research to choose the next dependent question.
+7. Walk down the decision tree in dependency order: user/workflow, current stack, data ownership, auth/SSO, integration surface, hosting/deploy, budget, compliance/security, migration/export, operational ownership, and success criteria.
+8. Stop interviewing when remaining uncertainty no longer changes the recommendation materially.
+9. Finish with the normal Recommendation Shape and source links.
+
+Press on vague answers and hidden tradeoffs, but avoid philosophical questions. If the user asks to move faster, batch the next 3 most important questions and state what uncertainty remains.
+
 ## Discovery Workflow
 
 1. Clarify the job-to-be-done: user, workflow, must-have behavior, success criteria, timeline, data ownership, auth, hosting preference, budget sensitivity, compliance needs, stakeholders, and integration surface.
@@ -53,7 +91,11 @@ Prefer solutions in this order unless the user gives different constraints:
 8. Build a candidate set of 5-10 options, then shortlist 3-5 serious choices plus a custom-build baseline.
 9. Validate candidates in two layers: first identify plausible alternatives, then verify fit against the user's actual workflow, codebase, constraints, and non-negotiable requirements.
 
-Ask at most 3 concise questions only when missing constraints would materially change the recommendation. If the user asks for speed, proceed with explicit assumptions.
+In `Quick Check Mode`, ask at most 1 clarifying question.
+
+In `Standard Research Mode`, ask at most 3 concise questions only when missing constraints would materially change the recommendation. If the user asks for speed, proceed with explicit assumptions.
+
+In `Interactive Discovery Interview Mode`, ask one question at a time until the decision tree is resolved enough to make a defensible recommendation.
 
 ## Research Depth And Tool Preference
 
