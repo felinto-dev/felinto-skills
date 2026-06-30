@@ -74,10 +74,12 @@ Do not switch to a smaller image from an obscure or less trusted Docker Hub publ
 When choosing image tags:
 
 - Prefer official images or the app publisher's official image.
+- For default image tag variables, choose the best production-oriented upstream-published tag by default, not merely `latest`, when it is clearly available and compatible. Users can still override the tag before deploy.
 - Prefer pinned stable versions over `latest`, unless upstream explicitly recommends `latest` or does not publish stable tags.
+- Prefer secure or small upstream variants such as `alpine`, `slim`, `distroless`, `nonroot`, or documented combinations like `slim-nonroot` when compatible. Do not invent tag names.
 - Prefer Alpine/slim variants for supporting services when upstream supports them and the app does not require OS packages missing from those variants.
-- Avoid Alpine/slim variants when they are known to break native extensions, database locale/ICU requirements, shell scripts, health tooling, or upstream support expectations.
-- Mention any intentional non-Alpine choice when it affects resource usage or reliability.
+- Avoid Alpine/slim/distroless variants when they are known to break native extensions, database locale/ICU requirements, shell scripts, health tooling, debugging needs, or upstream support expectations.
+- Mention any intentional larger/root/default-image choice when it affects resource usage, security posture, or reliability.
 
 ## Output Target
 
