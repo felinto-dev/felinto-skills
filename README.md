@@ -4,6 +4,7 @@ Skills de agentes para uso com a CLI aberta `npx skills`.
 
 ## Skills Disponiveis
 
+- `actionable-reading` - Transforma materiais de leitura fornecidos pelo usuario em guias praticos de aplicacao.
 - `caprover-one-click-app` - Cria, converte, valida e melhora templates CapRover One-Click App.
 - `dont-reinvent-the-wheel` - Pesquisa solucoes existentes antes de criar uma feature do zero.
 
